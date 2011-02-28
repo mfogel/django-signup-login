@@ -1,6 +1,6 @@
 import urlparse
 
-def redirect_to_security_check(request, redirect_to):
+def redirect_to_security_check(redirect_to, request):
     """
     Short security check of redirect_to param.
     Logic taken from django.contrib.auth.login
