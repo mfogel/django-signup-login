@@ -1,0 +1,5 @@
+<form action="{{ form.action }}" method="post" {{ form.is_featured|yesno:'class="featured",'|safe }}>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{{ form_submit_value }}"></input>
+</form>

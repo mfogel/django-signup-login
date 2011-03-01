@@ -1,0 +1,13 @@
+<div class="signup_login_form_wrapper">
+<h3>Sign Up:</h3>
+{% include "signup_login/includes/signup_form.html" %}
+</div>
+
+<div class="signup_login_form_wrapper">
+<h3>Log In:</h3>
+{% include "signup_login/includes/login_form.html" %}
+</div>
+
+<span class="signup_login_forgot_password">
+Forgot your password?  <a href="{% url auth_password_reset %}">Reset your password</a>.
+</span>
