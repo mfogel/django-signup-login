@@ -8,6 +8,13 @@ from .generic_views import MultipleFormMixin, MultipleFormView
 from .utils import redirect_to_security_check
 
 
+class LoginRequiredMixin(object):
+    "Require user login for all http methods."
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
 class SignupMultipleFormMixin(MultipleFormMixin):
     form_class = auth.forms.UserCreationForm
     context_form_name = 'signup_form'
@@ -49,10 +56,9 @@ class SignupLoginIframeView(MultipleFormView):
     template_name = 'signup_login/iframes/signup_login.html'
 
 
-class LogoutView(RedirectView):
+class LogoutView(LoginRequiredMixin, RedirectView):
     permanent = False
 
-    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         auth.logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
