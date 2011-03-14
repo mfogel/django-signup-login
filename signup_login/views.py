@@ -43,6 +43,12 @@ class SignupLoginView(MultipleFormView):
     template_name = 'signup_login/signup_login.html'
 
 
+class SignupLoginIframeView(MultipleFormView):
+    multiple_form_mixin_classes = \
+            (SignupMultipleFormMixin, LoginMultipleFormMixin)
+    template_name = 'signup_login/iframes/signup_login.html'
+
+
 class LogoutView(RedirectView):
     permanent = False
 
