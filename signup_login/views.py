@@ -31,7 +31,6 @@ class SignupMultipleFormMixin(MultipleFormMixin):
         auth.login(self.request, user)
         return super(SignupMultipleFormMixin, self).form_valid(form)
 
-
 class LoginMultipleFormMixin(MultipleFormMixin):
     form_class = auth.forms.AuthenticationForm
     context_form_name = 'login_form'
@@ -43,16 +42,21 @@ class LoginMultipleFormMixin(MultipleFormMixin):
         auth.login(self.request, form.get_user())
         return super(LoginMultipleFormMixin, self).form_valid(form)
 
-
 class SignupLoginView(MultipleFormView):
     multiple_form_mixin_classes = \
             (SignupMultipleFormMixin, LoginMultipleFormMixin)
     template_name = 'signup_login/signup_login.html'
 
 
+class SignupIframeMultipleFormMixin(SignupMultipleFormMixin):
+    submit_url_name = 'accounts_signup_iframe'
+
+class LoginIframeMultipleFormMixin(LoginMultipleFormMixin):
+    submit_url_name = 'accounts_login_iframe'
+
 class SignupLoginIframeView(MultipleFormView):
     multiple_form_mixin_classes = \
-            (SignupMultipleFormMixin, LoginMultipleFormMixin)
+            (SignupIframeMultipleFormMixin, LoginIframeMultipleFormMixin)
     template_name = 'signup_login/iframes/signup_login.html'
 
 
