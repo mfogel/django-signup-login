@@ -1,6 +1,6 @@
 import copy
 
-from django.conf import settings
+from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.views.generic.base import TemplateView
@@ -30,7 +30,7 @@ class MultipleFormMixin(FormMixin):
         django.contrib.auth.login
 
         """
-        redirect_to = self.request.GET.get(settings.REDIRECT_FIELD_NAME)
+        redirect_to = self.request.GET.get(REDIRECT_FIELD_NAME)
         if not redirect_to or \
                 not redirect_to_security_check(redirect_to, self.request):
             redirect_to = reverse(self.success_url_name)

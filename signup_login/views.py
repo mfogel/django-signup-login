@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import RedirectView
 
-from .decorators import login_required
 from .generic_views import MultipleFormMixin, MultipleFormView
 from .utils import redirect_to_security_check
 
@@ -68,7 +68,7 @@ class LogoutView(LoginRequiredMixin, RedirectView):
         return super(LogoutView, self).get(request, *args, **kwargs)
 
     def get_redirect_url(self, **kwargs):
-        redirect_to = self.request.GET.get(settings.REDIRECT_FIELD_NAME)
+        redirect_to = self.request.GET.get(auth.REDIRECT_FIELD_NAME)
         if not redirect_to or \
                 not redirect_to_security_check(redirect_to, self.request):
             redirect_to = settings.LOGOUT_REDIRECT_URL
