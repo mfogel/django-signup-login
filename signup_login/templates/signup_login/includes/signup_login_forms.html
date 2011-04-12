@@ -9,5 +9,5 @@
 </div>
 
 <span class="signup_login_forgot_password">
-Forgot your password?  <a href="{% url auth_password_reset %}">Reset your password</a>.
+Forgot your password?  <a href="{% if iframe %}{% url auth_password_reset_iframe %}{% else %}{% url auth_password_reset %}{% endif %}">Reset your password</a>.
 </span>
