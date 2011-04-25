@@ -1,0 +1,15 @@
+{% extends "iframe_base.html" %}
+
+{% comment %}
+This template fires a jquery event 'signup-login' on document of the parent.
+Intended to be used on success for an iframed-signin.
+This assumes jquery has been loaded in the parent's JS space.
+{% endcomment %}
+
+{% block main_content %}
+<script type="text/javascript">
+if (window.parent && window.parent.document) {
+    parent.$(parent.document).trigger('signup-login');
+}
+</script>
+{% endblock main_content %}

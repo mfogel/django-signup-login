@@ -33,6 +33,10 @@ urlpatterns = patterns('',
         view=SignupLoginIframeView.as_view(),
         name='accounts_signup_login_iframe'
     ),
+    url(r'^iframes/signup-login/success/$',
+        view=SignupLoginSuccessIframeView.as_view(),
+        name='accounts_signup_login_success_iframe'
+    ),
 
     url(r'^logout/$',
         view=LogoutView.as_view(),

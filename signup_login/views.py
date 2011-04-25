@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
 from .generic_views import MultipleFormMixin, MultipleFormView
 from .utils import redirect_to_security_check
@@ -50,15 +50,19 @@ class SignupLoginView(MultipleFormView):
 
 class SignupIframeMultipleFormMixin(SignupMultipleFormMixin):
     submit_url_name = 'accounts_signup_iframe'
+    success_url_name = 'accounts_signup_login_success_iframe'
 
 class LoginIframeMultipleFormMixin(LoginMultipleFormMixin):
     submit_url_name = 'accounts_login_iframe'
+    success_url_name = 'accounts_signup_login_success_iframe'
 
 class SignupLoginIframeView(MultipleFormView):
     multiple_form_mixin_classes = \
             (SignupIframeMultipleFormMixin, LoginIframeMultipleFormMixin)
     template_name = 'signup_login/iframes/signup_login.html'
 
+class SignupLoginSuccessIframeView(TemplateView):
+    template_name = 'signup_login/iframes/success.html'
 
 class LogoutView(LoginRequiredMixin, RedirectView):
     permanent = False
